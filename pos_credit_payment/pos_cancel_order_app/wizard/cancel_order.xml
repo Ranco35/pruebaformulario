@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record id="view_draft_order" model="ir.ui.view">
+            <field name="name">Reset to Draft</field>
+            <field name="model">cancel.order</field>
+            <field name="arch" type="xml">
+                <form string="Reset to Draft">
+                    <sheet>
+                        <span>Are you sure you want to reset the record to draft?</span>
+                    </sheet>
+                    <footer>
+                        <button name="cancel_order" string="Yes" type="object"
+                        class="btn-primary"/>
+                        <button string="No" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_cancel_order" model="ir.ui.view">
+            <field name="name">Cancel Order</field>
+            <field name="model">delete.order</field>
+            <field name="arch" type="xml">
+                <form string="Cancel Order">
+                    <sheet>
+                        <span>Are you sure you want to reset to delete this record?</span>
+                    </sheet>
+                    <footer>
+                        <button name="delete_order" string="Yes" type="object"
+                        class="btn-primary"/>
+                        <button string="No" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+		<act_window
+			id="cancel_and_draft"
+			name="Cancel and Reset to Draft"
+			res_model="cancel.order"
+			binding_model="pos.order"
+			view_mode="form"
+			domain="[('id', '=' ,active_ids)]"
+			target="new"
+		/>
+
+		<act_window
+			id="pdf_report"
+			name="Cancel and Delete"
+			res_model="delete.order"
+			binding_model="pos.order"
+			view_mode="form"
+			domain="[('id', '=' ,active_ids)]"
+			target="new"
+		/>
+	</data>
+</odoo>

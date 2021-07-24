@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record id="cancel_res_config_settings_view_form" model="ir.ui.view">
+			<field name="name">res.config.settings.view.form.inherit.pos_cancel_order</field>
+			<field name="model">res.config.settings</field>
+			<field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//div[@data-key='point_of_sale']" position="inside">
+					<h2 groups="pos_cancel_order_app.group_cancel_pos_order">Cancel Order</h2>
+					<div class="row mt16 o_settings_container" groups="pos_cancel_order_app.group_cancel_pos_order">
+						<div class="col-12 col-lg-6 o_setting_box" id="cancel_order">
+							<div class="o_setting_left_pane"/>
+							<div class="o_setting_right_pane">
+								<span class="o_form_label">Order Operation Type</span>
+								<div class="content-group">
+									<field name="order_cancel" class="o_light_label mt16" widget="radio"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible':[('order_cancel','==','draft')]}">
+							<div class="o_setting_left_pane">
+								<field name="cancel_invoice"/>
+							</div>
+							<div class="o_setting_right_pane">
+								<label for="cancel_invoice"/>
+							</div>
+						</div>
+						<div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible':[('order_cancel','==','draft')]}">
+							<div class="o_setting_left_pane">
+								<field name="cancel_delivery_order"/>
+							</div>
+							<div class="o_setting_right_pane">
+								<label for="cancel_delivery_order"/>
+							</div>
+						</div>
+					</div>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="pos_order_view_inherit" model="ir.ui.view">
+			<field name="name">pos.view.form.inherit.pos_cancel_order</field>
+			<field name="model">pos.order</field>
+			<field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//header" position="inside">
+					<button name="action_order_cancel" string="Cancel" type="object" states="paid,invoiced"/>
+				</xpath>
+			</field>
+		</record>
+
+		<record id="group_cancel_pos_order" model="res.groups">
+			<field name="name">POS Cancel Order</field>
+		</record>
+	</data>
+</odoo>
