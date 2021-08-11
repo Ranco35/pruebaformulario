@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cancel_order,access.cancel.order,model_cancel_order,,1,1,1,0
+access_delete_order,access.delete.order,model_delete_order,,1,1,1,0
